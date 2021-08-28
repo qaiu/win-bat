@@ -1,5 +1,5 @@
 ::
-:: 根据模板生成xml文件 
+:: generate service xml file
 ::
 
 @echo off
