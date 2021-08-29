@@ -1,59 +1,55 @@
-:: ±¸·ÝÎÄ¼þÃüÃû¹æÔò: Êý¾Ý¿âÃû_µ±Ç°Ê±¼ä´Á_Êý¾Ý¿â¹ÜÀíÏµÍ³Ãû.sql	e.g. demodb_20120503101305_PostgreSQL.sql
-:: Ê¹ÓÃWinRARµÄÃüÁîÐÐ³ÌÐòRar.exeÀ´Ñ¹Ëõ±¸·ÝºÃµÄ.sqlÎÄ¼þ£¬Ç°ÌáÊÇÏµÍ³ÉÏÒª°²×°ÓÐWinRAR¶øÇÒÔÚ´Ë´¦µÄÂ·¾¶ÕýÈ·£¡
-:: @update qaiu.cn
-
 @echo off&@chcp 936 > nul
-:: PGSQL»Ö¸´ÃüÁî ×¢ÒâÖ´ÐÐ»áÉ¾³ýÔ­Êý¾Ý¿â!! 
-:: Îñ±ØÉ÷ÖØ²Ù×÷!! 
-:: Îñ±ØÉ÷ÖØ²Ù×÷!! 
-:: Îñ±ØÉ÷ÖØ²Ù×÷!! 
-::-----------------------------------ÅäÖÃ²¿·Ö------------------------------------------------------------
+:: PGSQLæ¢å¤å‘½ä»¤ æ³¨æ„æ‰§è¡Œä¼šåˆ é™¤åŽŸæ•°æ®åº“!! 
+:: åŠ¡å¿…æ…Žé‡æ“ä½œ!! 
+:: åŠ¡å¿…æ…Žé‡æ“ä½œ!! 
+:: åŠ¡å¿…æ…Žé‡æ“ä½œ!! 
+::-----------------------------------é…ç½®éƒ¨åˆ†------------------------------------------------------------
 
-:: PostgreSQL°²×°Â·¾¶
+:: PostgreSQLå®‰è£…è·¯å¾„
 set POSTGRESQL_DIR=D:\App\pgsql\bin
 
-:: WinRARÂ·¾¶
+:: WinRARè·¯å¾„
 set WINRAR_DIR=D:\Program Files\WinRAR
 
-:: ÓÃ»§Ãû ÃÜÂë
+:: ç”¨æˆ·å å¯†ç 
 set USER=postgres
 set PGPASSWORD=123456
 
 ::----------------------------------------------------------------------------------------------------------
 
-::ÅÐ¶ÏÅäÖÃÂ·¾¶ÊÇ·ñÕýÈ·
+::åˆ¤æ–­é…ç½®è·¯å¾„æ˜¯å¦æ­£ç¡®
 if not exist "%POSTGRESQL_DIR%\pg_dump.exe" (
-	echo PostgreSQLÂ·¾¶´íÎóÇë,ÐÞ¸Ä½Å±¾²ÎÊý
+	echo PostgreSQLè·¯å¾„é”™è¯¯è¯·,ä¿®æ”¹è„šæœ¬å‚æ•°
 	goto :quit
 )
 
 if not exist "%WINRAR_DIR%\UnRAR.exe" (
-	echo WinRARÂ·¾¶´íÎó,ÐÞ¸Ä½Å±¾²ÎÊý
+	echo WinRARè·¯å¾„é”™è¯¯,ä¿®æ”¹è„šæœ¬å‚æ•°
 	goto :quit
 )
 
-:: ²éÕÒSQLÑ¹Ëõ°üÎÄ¼þÃû
+:: æŸ¥æ‰¾SQLåŽ‹ç¼©åŒ…æ–‡ä»¶å
 cd %~dp0
 for %%i in (*_20*.rar) do (
 	set FILE_NAME=%%i
 	goto :label1
 )
-echo Î´ÕÒµ½rarÑ¹Ëõ°ü
+echo æœªæ‰¾åˆ°raråŽ‹ç¼©åŒ…
 goto :quit
 :label1
-:: Êý¾Ý¿âÃû
+:: æ•°æ®åº“å
 set DB_NAME=%FILE_NAME:~0,-19%
 :start
-echo ±¸·ÝÑ¹Ëõ°üÃû:%FILE_NAME%
-echo »Ö¸´Êý¾Ý¿âÃû:%DB_NAME%
-echo ´Ë²Ù×÷»áÇå¿ÕÒÑ´æÔÚÊý¾Ý¿âÈç¹ûÊý¾Ý¿â²»´æÔÚÔò×Ô¶¯´´½¨,ÇëÉ÷ÖØ²Ù×÷!!!
-echo ÇëÊäÈë[YÈ·ÈÏ; RÐÞ¸Ä¿âÃû; ÆäËûÈÎÒâ¼üÍË³ö]:
+echo å¤‡ä»½åŽ‹ç¼©åŒ…å:%FILE_NAME%
+echo æ¢å¤æ•°æ®åº“å:%DB_NAME%
+echo æ­¤æ“ä½œä¼šæ¸…ç©ºå·²å­˜åœ¨æ•°æ®åº“å¦‚æžœæ•°æ®åº“ä¸å­˜åœ¨åˆ™è‡ªåŠ¨åˆ›å»º,è¯·æ…Žé‡æ“ä½œ!!!
+echo è¯·è¾“å…¥[Yç¡®è®¤; Rä¿®æ”¹åº“å; å…¶ä»–ä»»æ„é”®é€€å‡º]:
 set /p var=
 if "%var%" equ "R" (
-	set /p DB_NAME=ÇëÊäÈë¿âÃû:
+	set /p DB_NAME=è¯·è¾“å…¥åº“å:
 	goto :start
 ) else if "%var%" neq "Y" (
-	echo ÓÃ»§È¡Ïû»Ö¸´
+	echo ç”¨æˆ·å–æ¶ˆæ¢å¤
 	goto :quit
 )
 set PATH=%POSTGRESQL_DIR%;%WINRAR_DIR%;%PATH%
@@ -68,7 +64,7 @@ psql -d %DB_NAME% -U %USER% -f "%TEMP%\%SQL_FILE%"
 
 echo delete temp file
 del %TEMP%\%SQL_FILE%
-echo »Ö¸´Íê³É
+echo æ¢å¤å®Œæˆ
 :quit
 pause
 :: exit
